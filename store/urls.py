@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import ProductLandingPageView
 from . import views
 urlpatterns=[
     path('', views.index, name='index'),
-    path('landing/', ProductLandingPageView.as_view(), name='landing'),
-]
+    path('producto/<int:producto_id>/', views.detail_product, name='detail_product'),
+    ]

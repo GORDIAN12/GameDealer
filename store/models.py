@@ -1,14 +1,13 @@
 from django.db import models
 
 class Product(models.Model):
-    name=models.CharField(max_length=100)
-    price=models.IntegerField(default=0) #cents
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    stock = models.IntegerField()
+    imagen = models.ImageField(upload_to='static/', null=True, blank=True)
 
     def __str__(self):
-        return self.name
-    
-    def get_display_price(self):
-        return "{0:.2f}".format(self.price / 100)
-
+        return self.nombre
 
 

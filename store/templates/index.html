@@ -1,1 +1,26 @@
-<h1>this the index page</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <ul>
+        {% for producto in products %}
+            <li>
+                <h2>{{ producto.nombre }}</h2>
+                <p>{{ producto.descripcion }}</p>
+                <p>Precio: ${{ producto.precio }}</p>
+                <p>Stock: {{ producto.stock }}</p>
+                {% if producto.imagen %}
+			<a href="{% url 'detail_product' producto.id %}">
+				<img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="150">
+			</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

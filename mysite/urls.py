@@ -16,16 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from store.views import (
-        CreateCheckoutSessionView,
-        ProductLandingPageView,
-        succesView, cancelView,
-        )
 urlpatterns = [
         path('', include('store.urls')),
         path('admin/', admin.site.urls),
-        path('succes/', succesView.as_view(), name='succes'),
-        path('cancel/', cancelView.as_view(), name='cancel'),
-        path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
-        path('', ProductLandingPageView.as_view(), name="landing-page"),
     ]

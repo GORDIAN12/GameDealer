@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+STATIC_DIR=os.path.join(BASE_DIR, "static")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -122,10 +122,7 @@ STRIPE_PUBLIC_KEY="pk_test_51QbYJAHI987lTkKB4PMUqepzZ8veqIf4JPoXjpsENMWY8YIeXR0L
 STRIPE_SECRET_KEY="sk_test_51QbYJAHI987lTkKBBImNbyQFtM4uch6ttclQKfDHFxgqB1IJZFjBCsXjUtNi59icaCMA8Rhnlj111X6F2JrOyjUK00cF4S7YZl"
 STRIPE_WEBHOOK_SECRET=""
 
-STATICFILES_DIRS=[
-    BASE_DIR / 'static',
-        ]
-
+STATICFILES_DIRS=[STATIC_DIR,]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

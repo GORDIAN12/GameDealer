@@ -1,25 +1,32 @@
-{%extends 'origin.html'%}
-{%load static%}
-{%block styles_extra%}
-	    
+{% extends 'origin.html' %}
+{% load static %}
+
+{% block styles_extra %}
 <link rel="stylesheet" href="{% static 'estilos.css' %}">
-            {%endblock%}
-{%block title%}Productos{%endblock%}
-    <h1>Lista de Productos</h1>
-    {%block content%}
-    <ul class="grid">
-        {% for producto in products %}
-            <li>
-                <h2>{{ producto.nombre }}</h2>
-                <p>{{ producto.descripcion }}</p>
-                <p>Precio: ${{ producto.precio }}</p>
-                <p>Stock: {{ producto.stock }}</p>
-                {% if producto.imagen %}
-			<a href="{% url 'detail_product' producto.id %}">
-				<img class="img_game" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="150">
-			</a>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
-    {%endblock%}
+{% endblock %}
+
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<div class="image-container">
+
+<img class="back-play" src="{% static 'img_juegos/backgrounds/fondo.jpg' %}" alt="Fondo de juegos">
+<img class="astro" src="{% static 'img_juegos/backgrounds/astro.webp' %}" alt="Fondo de juegos">
+</div>
+<ul class="grid">
+    {% for producto in products %}
+        <li>
+            <h2>{{ producto.nombre }}</h2>
+            <p>{{ producto.descripcion }}</p>
+            <p>Precio: ${{ producto.precio }}</p>
+            <p>Stock: {{ producto.stock }}</p>
+            {% if producto.imagen %}
+                <a href="{% url 'detail_product' producto.id %}">
+                    <img class="img_game" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="150">
+                </a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

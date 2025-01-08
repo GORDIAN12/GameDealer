@@ -1,0 +1,14 @@
+.grid{
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(6,1fr);
+	gap: 10px;
+	width: 350px;
+	height: 350px;
+}
+
+.img_game{
+	width: 250px;
+	height: 250px;
+	border-radius: 4%;
+}

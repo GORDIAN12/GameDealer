@@ -1,9 +1,13 @@
-
 {%extends 'origin.html'%}
+{%load static%}
+{%block styles_extra%}
+	    
+<link rel="stylesheet" href="{% static 'estilos.css' %}">
+            {%endblock%}
 {%block title%}Productos{%endblock%}
     <h1>Lista de Productos</h1>
     {%block content%}
-    <ul>
+    <ul class="grid">
         {% for producto in products %}
             <li>
                 <h2>{{ producto.nombre }}</h2>
@@ -12,7 +16,7 @@
                 <p>Stock: {{ producto.stock }}</p>
                 {% if producto.imagen %}
 			<a href="{% url 'detail_product' producto.id %}">
-				<img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="150">
+				<img class="img_game" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="150">
 			</a>
                 {% endif %}
             </li>

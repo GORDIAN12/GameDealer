@@ -1,17 +1,31 @@
+.games {
+    display: flex;
+    justify-contenit: center;
+    align-items: center;
+    height: 70vh;
+    padding: 32px;
+}
 .grid{
 	list-style: none;
 	display: grid;
-	grid-template-columns: repeat(6,1fr);
-	gap: 10px;
-	width: 350px;
-	height: 350px;
+	grid-template-columns: repeat(6,2fr);
+	gap: 12px;	
+	max-width: 100%;
+	width: 100%;
 }
 
 .img_game{
-	width: 250px;
-	height: 250px;
+	width: 95%;
+	height: 100%;
+	object-fit: cover;
 	border-radius: 4%;
+	transition: transform 0.3s ease-in-out;
 }
+.img_game:hover{
+	transform: scale(1.15);
+}
+
+
 .image-container {
     position: relative;
     width: 100%;
@@ -26,10 +40,64 @@
 
 .astro {
     position: absolute;  /* Esto la coloca sobre la imagen de fondo */
-    top: 70%; 
+    top: 75%; 
     left: 50%;  /* Centra la imagen superpuesta horizontalmente */
     transform: translate(-50%, -50%);  /* Ajuste preciso del centrado */
-    width: 30%;  /* Ajusta el tamaño de la imagen superpuesta según lo necesites */
+    width: 25%;  /* Ajusta el tamaño de la imagen superpuesta según lo necesites */
     height: auto;
 }
 
+.astro-hoja {
+    position: absolute;  /* Esto la coloca sobre la imagen de fondo */
+    top: 77%; 
+    left: 80%;  /* Centra la imagen superpuesta horizontalmente */
+    transform: translate(-50%, -50%);  /* Ajuste preciso del centrado */
+    width: 20%;  /* Ajusta el tamaño de la imagen superpuesta según lo necesites */
+    height: auto;
+}
+
+.kratos {
+    position: absolute;
+    top: 70%; 
+    left: 20%; 
+    transform: translate(-50%, -50%);
+    width: 12%; 
+    height: auto;
+}
+
+
+.title-play {
+display: flex;
+justify-content: center;
+margin:0 3%;
+color: white;
+font-weight: bold;
+font-size: 45px;
+}
+
+.container-games{
+background-color: black;
+  }
+.back-spider {
+    position: relative;
+    width: 100%;
+    height: 750px;
+}
+
+  .spider{
+width: 100%;
+height: 100%;
+object-fit: cover;  
+
+}
+
+.back-spider::before {
+    content: ''; /* Crea un pseudo-elemento vacío */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, #000000, rgba(0, 0, 0, 0)); /* Degradado de negro a transparente */
+    z-index: 1; /* Coloca el degradado encima de la imagen */
+}

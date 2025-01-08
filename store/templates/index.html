@@ -12,14 +12,18 @@
 
 <img class="back-play" src="{% static 'img_juegos/backgrounds/fondo.jpg' %}" alt="Fondo de juegos">
 <img class="astro" src="{% static 'img_juegos/backgrounds/astro.webp' %}" alt="Fondo de juegos">
+<img class="astro-hoja" src="{% static 'img_juegos/backgrounds/astro-hoja.png' %}" alt="Fondo de juegos">
+<img class="kratos" src="{% static 'img_juegos/backgrounds/astro2.webp' %}" alt="Fondo de juegos">
+
+
+
 </div>
-<ul class="grid">
+<div class="container-games">
+<h2 class="title-play">Nuestra seleccion para ti</h2>
+<div class="games">
+	<ul class="grid">
     {% for producto in products %}
         <li>
-            <h2>{{ producto.nombre }}</h2>
-            <p>{{ producto.descripcion }}</p>
-            <p>Precio: ${{ producto.precio }}</p>
-            <p>Stock: {{ producto.stock }}</p>
             {% if producto.imagen %}
                 <a href="{% url 'detail_product' producto.id %}">
                     <img class="img_game" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="150">
@@ -28,5 +32,13 @@
         </li>
     {% endfor %}
 </ul>
+</div>
+</div>
+<div class="back-spider">
+<img class="spider" src="{% static 'img_juegos/backgrounds/siper.webp' %}" alt="Fondo de juegos">
+
+</div>
+
+
 {% endblock %}
 

@@ -4,23 +4,52 @@
     font-weight: normal;
     font-style: normal;
 }
-body{
+body {
     font-family: 'custom-font', sans-serif;
-}
-.grid{
-	list-style: none;
-	display: grid;
-	grid-template-columns: repeat(6,1fr);
-	gap: 10px;
-	width: 350px;
-	height: 350px;
+    flex-direction: column; /* Asegura que los elementos estén apilados */
+    min-height: 100vh; /* Altura mínima para ocupar toda la ventana */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Fondo opcional */
 }
 
-.img_game{
-	width: 250px;
-	height: 250px;
-	border-radius: 4%;
+
+.grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0; 
 }
+
+.img_game {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 4%;
+    transition: transform 0.3s ease;
+}
+
+.img_game:hover{
+	transform: scale(1.1);
+}
+
+.container-games {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+}
+
 
 .image-container {
     position: relative;
@@ -60,17 +89,14 @@ body{
     width: 12%; 
     height: auto;
 }
-.section-info{
-    margin-top: 15%;
-}
 .gra{
-width: 100%;
-height: 755px;
-background-image: linear-gradient(to top, black, transparent);
-position: absolute;
-opacity: 0.7;
-left:0;
-z-index: 1;
+	width: 100%;
+	height: 755px;
+	background-image: linear-gradient(to top, black, transparent);
+	position: absolute;
+	opacity: 0.7;
+	left:0;
+	z-index: 1;
 }
 .spider{
 	width: 100%;
@@ -78,9 +104,15 @@ z-index: 1;
 	object-fit: cover;
 	object-position: 50% 10%;
 	display: block;
-position: absolute;
+	position: absolute;
 }
 
+.title-spider, .text2,.text3,.text4 {
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	color: white;
+}
 
 .rect-fig{
 	width: 750px;
@@ -88,6 +120,11 @@ position: absolute;
 	background-image: linear-gradient(to top, black, transparent);
 	z-index: 2;
        	left: 55%;
-margin: 2rem;	
+	margin: 2rem;	
 	position: absolute;
+	transition:  transform 0.3s ease; 
+}
+
+.rect-fig:hover{
+	transform: scale(1.05);
 }

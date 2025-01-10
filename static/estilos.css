@@ -1,3 +1,12 @@
+@font-face{
+    font-family: 'custom-font';
+    src: url("font_play.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family: 'custom-font', sans-serif;
+}
 .grid{
 	list-style: none;
 	display: grid;
@@ -24,9 +33,7 @@
     height: 100%;
     object-fit: cover;
 }
-.container-games{
-	margin-bottom: 12%;
-}
+
 .astro {
     position: absolute;  /* Esto la coloca sobre la imagen de fondo */
     top: 75%; 
@@ -53,7 +60,9 @@
     width: 12%; 
     height: auto;
 }
-
+.section-info{
+    margin-top: 15%;
+}
 .gra{
 width: 100%;
 height: 755px;

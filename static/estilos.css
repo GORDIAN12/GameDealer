@@ -89,6 +89,13 @@ body {
     width: 12%; 
     height: auto;
 }
+.container-info {
+	position: relative;
+	width: 100%;
+    	height: 75vh; /* Ocupa toda la ventana */
+   	 overflow: hidden; /* Oculta cualquier contenido desbordado */
+}
+
 .gra{
 	width: 100%;
 	height: 755px;
@@ -106,25 +113,50 @@ body {
 	display: block;
 	position: absolute;
 }
-
-.title-spider, .text2,.text3,.text4 {
-	width: 100%;
+.spider-game{
 	position: absolute;
+	width: 25%;
+	height: auto;
+	left: 75%;
+	top: 35%;
+	transform: translate(-50%,-50%);
+	object-fit: contain;
 	z-index: 1;
+}
+.rectangle{
+	background-color: #17161d;
+	width: 25%;
+	left: 75%;
+	top:66%;
+	z-index: 0;
+	position: absolute;
+	height: 30%;
+	transform: translate(-50%,-50%);
+}
+.text{
+	font-size: x-small;
 	color: white;
 }
 
-.rect-fig{
-	width: 750px;
-	height: 700px;
-	background-image: linear-gradient(to top, black, transparent);
-	z-index: 2;
-       	left: 55%;
-	margin: 2rem;	
+.text1{
 	position: absolute;
-	transition:  transform 0.3s ease; 
+	left: 64%;
+	top: 60%;
+	z-index: 2;
 }
 
-.rect-fig:hover{
-	transform: scale(1.05);
+
+.text2{
+	position: absolute;
+	left: 75%;
+	top: 60%;
+	z-index: 2;
+}
+
+.information-spider{
+	transition: transform 0.3s ease;
+}
+
+.information-spider:hover{
+	transform: scale(1);
 }

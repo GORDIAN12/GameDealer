@@ -13,6 +13,12 @@ def index(request):
 
 def origin(request):
     return render(request, 'origin.html')
+def payment_succesful(request):
+    return render(request, 'payment_succesful.html')
+def payment_cancelled(request):
+    return render(request, 'payment_cancelled.html')
+
+
 
 
 def detail_product(request, producto_id):

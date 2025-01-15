@@ -131,23 +131,24 @@ body {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 0;
+    padding: 5px;
 }
 
 .card-text {
     margin: 0;
     font-family: Arial, sans-serif;
+	align-items: center;
 }
 
 .left-text, .right-text {
     display: inline-block;
-    margin: 0 18px; /* Espacio entre los textos */
 	margin: 18px;
+	margin-bottom:0;
 	font-size: 15px;
 }
 
-.right-text {
-    text-align: right;
+.right-text .left-text {
+    text-align: center;
 }
 .btn-spider {
     background-color: #d63d00;
@@ -183,4 +184,9 @@ body {
 }
 .right-item {
     margin: 0 5px; /* Espacio entre los textos */
+}
+
+.price-game{
+	color: white;
+	padding-left: 40px;
 }

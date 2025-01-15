@@ -37,14 +37,26 @@
 <div class="container-info">
 	<div class="gra"></div>
 	<img class="spider" src="{% static 'img_juegos/backgrounds/siper.webp' %}" alt="Fondo de juegos">
-	<div class="information-spider">
-	<img class="spider-game" src="{% static 'img_juegos/backgrounds/spider.avif' %}" alt="Fondo de juegos">
-	<ul class="text">
-		<li class="text2"><p>Marvel's Spider-Man: Miles<br> Morales</p></li>
-		<li class="text1"><p>Marvel's Spider-Man<br> Remasterizado</p></li>
-	</ul>
-	<div class="rectangle"></div>
+	<div class="card">
+		<img src="{% static 'img_juegos/backgrounds/spider.avif' %}" class="card-img-top" alt="...">
+		<div class="card-body text-white">
+			<h5 class="card-title">Edición Definitiva</h5>
+			<div class="text-row2">
+				<div class="item-transparent left-item">PS4</div>
+				<div class="item-transparent right-item">PS5</div>
+			</div>
+				<div class="text-row">
+					<p class="card-text">
+					<span class="left-text">&#8226; Marvel's Spider-Man</span>
+					<span class="right-text">&#8226; Marvel's Spider-Man Deluxe</span>
+					</p>
+				</div>
+		</div>
+		<div class="text-center">
+			<a href="#" class="btn btn-spider"><h5>Agregar al carrito</h5></a>
+		</div>
 	</div>
-	</div>
-{% endblock %}
+</div>
+</div>
+	{% endblock %}
 

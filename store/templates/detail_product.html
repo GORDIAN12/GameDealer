@@ -14,7 +14,7 @@
 <div class="pt-32">
 <h2>{{product.name}}</h2>
 <p>{{product_price}}</p>
-<form enctype="multipart/from-data" method="post" role="product_page">
+<form enctype="/create-checkout-session" method="post" role="product_page">
 {%csrf_token%}
 <input type="hidden" name="price_id" value="price_1QhIBLHI987lTkKBCIO4pqkx">
 <input type="hidden" name="quantity" value="1">

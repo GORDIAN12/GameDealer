@@ -17,7 +17,7 @@ env=Env()
 env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_URL="http://localhost:8000"
 STATIC_DIR=os.path.join(BASE_DIR, "static")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'store',
     ]
 
@@ -132,3 +133,8 @@ STATICFILES_DIRS=[STATIC_DIR,]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STRIPE_SECRET_KEY=env('STRIPE_SECRET_KEY_TEST', default="secret")
+
+LOGIN_REDIRECT_URL = '/'  # Redirige aquí después de iniciar sesión
+LOGOUT_REDIRECT_URL = '/'  # Redirige aquí después de cerrar sesión
+LOGIN_URL = '/accounts/login/'  # Ruta al formulario de inicio de sesión
+

@@ -26,27 +26,27 @@ def origin(request):
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
-        domain_url = 'http://localhost:8000/home'
+        domain_url = 'http://localhost:8000/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
             checkout_session = stripe.checkout.Session.create(
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'cancelled/',
+                success_url=domain_url + 'payment_successful/',
+                cancel_url=domain_url + '',
                 payment_method_types=['card'],
                 mode='payment',
                 line_items=[
                     {
-                        'price': 'price_1QhIBLHI987lTkKBCIO4pqkx',
+                        'price': 'price_1QiOAbHI987lTkKBTFCZsNBr',
                         'quantity': 1,
                     }
-                ]
+                ],
             )
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
             return JsonResponse({'error': str(e)})
 
 
-def payment_succesful(request):
+def payment_successful(request):
     return render(request, 'payment_succesful.html')
 def payment_cancelled(request):
     return render(request, 'payment_cancelled.html')

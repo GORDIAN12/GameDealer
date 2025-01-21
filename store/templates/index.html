@@ -25,10 +25,9 @@
     {% for producto in products %}
         <li>
             {% if producto.imagen %}
-                <a href="{% url 'detail_product' producto.id %}">
                     <img class="img_game" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="150">
-                </a>
-            {% endif %}
+   
+		    {% endif %}
         </li>
     {% endfor %}
 </ul>

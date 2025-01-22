@@ -6,11 +6,21 @@
 </head>
 <body>
     <h2>Iniciar sesión</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Iniciar sesión</button>
-    </form>
+    {% if form.errors %}
+    <p>por favor revise su usuario y contraseña</p>
+    {% else %}
+    <p>por favor use el siguiente login</p>
+    {% endif %}
+    <div class="login-form">
+	<form action="{% url 'login' %}" method="post">
+		{{ form.as_p }}	
+		{% csrf_token %}
+		<input type="hidden"name="next" value="{{next}}" />
+		<p>
+			<input type="submit" value="Log-in">
+		</p>
+	</form>
+    </div>
 </body>
 </html>
 

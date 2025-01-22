@@ -7,8 +7,12 @@ from django.conf import settings
 from django.http.response import JsonResponse # new
 from django.views.decorators.csrf import csrf_exempt # new
 from django.views.generic.base import TemplateView
+from django.contrib.auth.decorators import login_required
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+@login_required
+def dashboard(request):
+    return render(request, 'registration/dashboard.html', {'section': 'dashboard'})
 
 
 def stripe_config(request):

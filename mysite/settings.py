@@ -135,6 +135,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STRIPE_SECRET_KEY=env('STRIPE_SECRET_KEY_TEST', default="secret")
 
 LOGIN_REDIRECT_URL = 'dashboard'  # Redirige aquí después de iniciar sesión
-LOGOUT_REDIRECT_URL = 'login'  # Redirige aquí después de cerrar sesión
-LOGIN_URL = 'logout'  # Ruta al formulario de inicio de sesión
+LOGOUT_URL = 'logout'  # Redirige aquí después de cerrar sesión
+LOGIN_URL = 'login'  # Ruta al formulario de inicio de sesión
 

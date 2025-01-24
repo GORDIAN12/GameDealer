@@ -7,10 +7,10 @@ urlpatterns=[
     path('origin', views.origin, name='origin'),
     path('home/', views.home, name='home'),
     path('config/', views.stripe_config),
-    path('create-checkout-session/', views.create_checkout_session), # new
+    path('create-checkout-session/', views.create_checkout_session),
     path('payment_successful/', views.payment_successful, name='payment_succesful'),
     path('payment_cancelled/', views.payment_cancelled, name='payment_cancelled'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('login/', auth_views.LoginView.as_view(),name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/',  auth_views.LoginView.as_view(), name='logout'),
     ]

@@ -2,4 +2,8 @@
 
 hello, {{request.user.username}}
 <p>welcome to your page</p>
-<a href="{% url 'logout' %}">Log out</a>
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">logout</button>
+</form>
+

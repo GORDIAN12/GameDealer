@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render,  redirect, reverse
 from django.http import HttpResponse
 from django.views import View
 from .models import Product
@@ -8,8 +8,9 @@ from django.http.response import JsonResponse # new
 from django.views.decorators.csrf import csrf_exempt # new
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
-
+from django .contrib.auth import authenticate, login, logout 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
 @login_required
 def dashboard(request):
     return render(request, 'registration/dashboard.html', {'section': 'dashboard'})

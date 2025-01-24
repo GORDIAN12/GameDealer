@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Django + Stripe Checkout</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://js.stripe.com/v3/"></script>  <!-- new -->
+    <script src="{% static 'main.js' %}"></script>   <!-- new -->
+    <script defer src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+	    <div class="max-w-4xl mx-auto px-8 py-24">
+    <div class="grid grid-cols-3 gap-6">
+        <div class="col-span-2 rounded-xl">
+            <img class="rounded-xl w-full h-auto" src="https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png">
+        </div>
+        <div class="pt-32">
+		<h2>{{product.name}}</h2>
+		<p class="text-lg">${{product_price}}</p>
+
+           <form enctype="multipart/form-data" method="post" role="product_page">
+            {% csrf_token %}
+            <input type="hidden" name="price_id" value="">
+            <input type="hidden" name="quantity" value="1">
+          	
+	   </form>
+
+       <button class="button is-primary" id="submitBtn">Purchase!</button>-
+       <p class="pt-8 text-sm">{{product.description}}</p>
+           <p class="text-sm hover:underline"><a href="https://andreas-juds-store.creator-spring.com/" target="_blank">Merch Store</a></p>
+        </div>
+    </div>
+</div>
+  </section>
+  </body>
+</html>

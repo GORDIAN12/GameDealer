@@ -24,9 +24,36 @@ def stripe_config(request):
 def index(request):
     products=Product.objects.all()
     return render(request, 'index.html', {'products': products})
+def product(request):
+    product_id='prod_RbbNI5xyHbYIQS'
+    product=stripe.Product.retrieve(product_id)
+    prices=stripe.Price.list(product=product_id)
+    price=prices.data[0]
+    product_price=price.unit_amount/100.0
 
-def origin(request):
-    return render(request, 'origin.html')
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect(f'{settings.BASE_URL}{reverse("login")}?next={request.get_full_path()}')
+
+        price_id = request.POST.get('price_id')
+        quantity = int(request.POST.get('quantity'))
+        checkout_session = stripe.checkout.Session.create(
+            line_items = [
+                {
+                    'price': price_id,
+                    'quantity': quantity,
+                },
+            ],
+            payment_method_types = ['card'],
+            mode = 'payment',
+            customer_creation = 'always',
+            success_url = f'{settings.BASE_URL}{reverse("payment_successful")}?session_id={{CHECKOUT_SESSION_ID}}',
+            cancel_url = f'{settings.BASE_URL}{reverse("payment_cancelled")}',
+        )
+        return redirect(checkout_session.url, code=303)  
+    
+
+    return render(request, 'product.html', {'product': product, 'product_price': product_price})
 
 @csrf_exempt
 def create_checkout_session(request):
@@ -51,15 +78,11 @@ def create_checkout_session(request):
             return JsonResponse({'error': str(e)})
 
 
+def origin(request):
+    return render(request, 'origin.html')
+
+
 def payment_successful(request):
     return render(request, 'payment_succesful.html')
 def payment_cancelled(request):
     return render(request, 'payment_cancelled.html')
-
-def home(request):
-    return render(request, 'home.html')
-
-
-
-
-

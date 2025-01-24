@@ -28,7 +28,11 @@
             <input type="hidden" name="quantity" value="1">
           	
 	   </form>
-
+<h1>Homepage</h1>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Purchase!</button>
+</form>
        <button class="button is-primary" id="submitBtn">Purchase!</button>-
        <p class="pt-8 text-sm">{{product.description}}</p>
            <p class="text-sm hover:underline"><a href="https://andreas-juds-store.creator-spring.com/" target="_blank">Merch Store</a></p>

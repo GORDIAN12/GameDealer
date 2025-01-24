@@ -24,65 +24,41 @@ def stripe_config(request):
 def index(request):
     products=Product.objects.all()
     return render(request, 'index.html', {'products': products})
-def product(request):
+def origin(request):
+    return render(request, 'origin.html')
+
+def product_view(request):  # new
     product_id='prod_RbbNI5xyHbYIQS'
     product=stripe.Product.retrieve(product_id)
     prices=stripe.Price.list(product=product_id)
     price=prices.data[0]
     product_price=price.unit_amount/100.0
-
+    stripe.api_key = settings.STRIPE_SECRET_KEY
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect(f'{settings.BASE_URL}{reverse("login")}?next={request.get_full_path()}')
-
-        price_id = request.POST.get('price_id')
-        quantity = int(request.POST.get('quantity'))
-        checkout_session = stripe.checkout.Session.create(
-            line_items = [
-                {
-                    'price': price_id,
-                    'quantity': quantity,
-                },
-            ],
-            payment_method_types = ['card'],
-            mode = 'payment',
-            customer_creation = 'always',
-            success_url = f'{settings.BASE_URL}{reverse("payment_successful")}?session_id={{CHECKOUT_SESSION_ID}}',
-            cancel_url = f'{settings.BASE_URL}{reverse("payment_cancelled")}',
-        )
-        return redirect(checkout_session.url, code=303)  
-    
-
-    return render(request, 'product.html', {'product': product, 'product_price': product_price})
-
-@csrf_exempt
-def create_checkout_session(request):
-    if request.method == 'GET':
-        domain_url = 'http://localhost:8000/'
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        try:
+        
+        if request.method == "POST":
             checkout_session = stripe.checkout.Session.create(
-                success_url=domain_url + 'payment_successful/',
-                cancel_url=domain_url + '',
-                payment_method_types=['card'],
-                mode='payment',
                 line_items=[
                     {
-                        'price': 'price_1QiOAbHI987lTkKBTFCZsNBr',
-                        'quantity': 1,
+                        "price": "price_1QiOAbHI987lTkKBTFCZsNBr",  # enter yours here!!!
+                        "quantity": 1,
                     }
                 ],
-            )
-            return JsonResponse({'sessionId': checkout_session['id']})
-        except Exception as e:
-            return JsonResponse({'error': str(e)})
-
-
-def origin(request):
-    return render(request, 'origin.html')
-
+                mode="payment",
+                #success_url=request.build_absolute_uri(reverse("payment_succesful")),
+                #cancel_url=request.build_absolute_uri(reverse("payment_cancelled")),
+                success_url = f'{settings.BASE_URL}{reverse("payment_successful")}?session_id={{CHECKOUT_SESSION_ID}}',
+                cancel_url = f'{settings.BASE_URL}{reverse("payment_cancelled")}',
+                )
+            return redirect(checkout_session.url, code=303)
+    return render(request, 'product.html', {'product': product, 'product_price': product_price})
 
 def payment_successful(request):
     return render(request, 'payment_succesful.html')
 def payment_cancelled(request):
     return render(request, 'payment_cancelled.html')
+
+
+

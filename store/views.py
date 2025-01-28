@@ -4,12 +4,44 @@ from django.views import View
 from .models import Product
 import stripe
 from django.conf import settings
-from django.http.response import JsonResponse # new
-from django.views.decorators.csrf import csrf_exempt # new
+#from django.http.response import JsonResponse # new
+#from django.views.decorators.csrf import csrf_exempt # new
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 from django .contrib.auth import authenticate, login, logout 
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+def register_view(request):
+    if request.method=='POST':
+        form=UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "cuenta exitosamente creada")
+            return redirect('login')
+    else:
+        form=UserCreationForm()
+
+    return render(request, 'registration/register.html',{'form': form, 'title': 'registro'})
+
+def login_view(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'usuario o contraseña incorrecto')
+
+    return render(request, 'registration/login.html', {'title': 'inicio sesion',})
+
+def logout_view(request):
+        logout(request)
+        return redirect('index')
 
 @login_required
 def dashboard(request):

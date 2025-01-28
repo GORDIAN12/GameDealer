@@ -2,8 +2,8 @@
 
 hello, {{request.user.username}}
 <p>welcome to your page</p>
-<form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit">logout</button>
-</form>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="nav-link btn btn-link p-2" style="text-decoration: none;">Salir</button>
+        </form>
 

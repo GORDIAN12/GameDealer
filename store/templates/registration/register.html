@@ -1,6 +1,18 @@
+{% extends 'origin.html' %}
+{% load static %}
+
+{% block styles_extra %}
+<link rel="stylesheet" href="{% static 'estilos.css' %}">
+{% endblock %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
 <h2>Registro</h2>
 <form method="POST">
 	{% csrf_token %}
 	{{form.as_p}}
 	<button type="submit">Resgistrarse</button>
 </form>
+
+{%endblock%}

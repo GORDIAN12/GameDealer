@@ -1,9 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar sesión</title>
-</head>
+{% extends 'origin.html' %}
+{% load static %}
+
+{% block styles_extra %}
+<link rel="stylesheet" href="{% static 'estilos.css' %}">
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
 <body>
     <h2>Iniciar sesión</h2>
 	<form method="POST">
@@ -15,6 +19,5 @@
 		<input type="password" name="password" required>
 		<button type="submit">iniciar sesion</button>
 	</form>
-</body>
-</html>
+{% endblock %}
 

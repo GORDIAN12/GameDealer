@@ -1,7 +1,14 @@
+{% extends 'origin.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
+
+{% block styles_extra %}
+<link rel="stylesheet" href="{% static 'estilos.css' %}">
+{% endblock %}
+
+{% block title %}Productos{% endblock %}
+
+{% block content %}  
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Django + Stripe Checkout</title>
@@ -41,4 +48,5 @@
 </div>
   </section>
   </body>
-</html>
+
+  {%endblock%}

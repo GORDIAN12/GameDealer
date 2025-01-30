@@ -29,18 +29,16 @@
 		<h2>{{product.name}}</h2>
 		<p class="text-lg">${{product_price}}</p>
 
-           <form enctype="multipart/form-data" method="post" role="product_page">
+           <form method="post">
             {% csrf_token %}
-            <input type="hidden" name="price_id" value="">
+	    <input type="hidden" name="price_id" value="{{price_id}}">
             <input type="hidden" name="quantity" value="1">
-          	
+              <button type="submit" class="button is-primary">Purchase!</button>
+	
 	   </form>
-<h1>Homepage</h1>
 <form method="post">
   {% csrf_token %}
-  <button type="submit">Purchase!</button>
 </form>
-       <button class="button is-primary" id="submitBtn">Purchase!</button>-
        <p class="pt-8 text-sm">{{product.description}}</p>
            <p class="text-sm hover:underline"><a href="https://andreas-juds-store.creator-spring.com/" target="_blank">Merch Store</a></p>
         </div>

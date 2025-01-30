@@ -4,8 +4,8 @@ from django.views import View
 from .models import Product
 import stripe
 from django.conf import settings
-#from django.http.response import JsonResponse # new
-#from django.views.decorators.csrf import csrf_exempt # new
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 from django .contrib.auth import authenticate, login, logout 
@@ -67,19 +67,20 @@ def product_view(request):  # new
     prices=stripe.Price.list(product=product_id)
     price=prices.data[0]
     product_price=price.unit_amount/100.0
-    
+
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    
+
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect(f'{settings.BASE_URL}{reverse("login")}?next={request.get_full_path()}')
-
         price_id = request.POST.get('price_id')
+        quantity = int(request.POST.get('quantity', '1'))
+
         checkout_session = stripe.checkout.Session.create(
                 line_items=[
                     {
-                        "price": 'price_1QiOAbHI987lTkKBTFCZsNBr',  # enter yours here!!!
-                        "quantity": 1,
+                        "price": price_id,
+                        "quantity": quantity,
                     },
                 ],
                 payment_method_types = ['card'],
@@ -89,7 +90,7 @@ def product_view(request):  # new
                 cancel_url = f'{settings.BASE_URL}{reverse("payment_cancelled")}',
                 )
         return redirect(checkout_session.url, code=303)
-    return render(request, 'product.html', {'product': product, 'product_price': product_price})
+    return render(request, 'product.html', {'product': product, 'product_price': product_price, 'price_id': price.id}) 
 
 def payment_successful(request):
     checkout_session_id = request.GET.get('session_id', None)
@@ -116,4 +117,25 @@ def payment_cancelled(request):
     return render(request, 'payment_cancelled.html')
 
 
+@require_POST
+@csrf_exempt
+def stripe_webhook(request):
+    endpoint_secret=settings.STRIPE_WEBHOOK_SECRET
+    payload = request.body
+    signature_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+    try:
+        event=stripe.Webhhok.construct_event(
+            payload, signature_header,endpoint_secret
+                )
+    except:
+        return HttpResponse(status=400)
 
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        checkout_session_id = session.get('id')
+        user_payment = UserPayment.objects.get(stripe_checkout_id=checkout_session_id)
+        user_payment.has_paid = True
+        user_payment.save()
+
+    return HttpResponse(status=200)

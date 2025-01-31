@@ -12,6 +12,7 @@ from django .contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm 
 from .models import *
+from .utils import *
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -61,9 +62,19 @@ def index(request):
 def origin(request):
     return render(request, 'origin.html')
 
-def product_view(request):  # new
-    product_id='prod_RbbNI5xyHbYIQS'
+def shop(request):
+    products_list=stripe.Product.list()
+    products=[]
+    for product in products_list['data']:
+        if product.get('metadata', {}).get('category')=="shop":
+            products.append(get_product_detail(product))
+
+    return render(request, 'shop.html', {'products':products })
+
+def product_view(request, product_id):
+    product=product_id
     product=stripe.Product.retrieve(product_id)
+    product_details=get_product_detail(product)
     prices=stripe.Price.list(product=product_id)
     price=prices.data[0]
     product_price=price.unit_amount/100.0
@@ -90,7 +101,7 @@ def product_view(request):  # new
                 cancel_url = f'{settings.BASE_URL}{reverse("payment_cancelled")}',
                 )
         return redirect(checkout_session.url, code=303)
-    return render(request, 'product.html', {'product': product, 'product_price': product_price, 'price_id': price.id}) 
+    return render(request, 'product.html', {'product': product_details, 'price_id': price.id})
 
 def payment_successful(request):
     checkout_session_id = request.GET.get('session_id', None)

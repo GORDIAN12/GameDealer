@@ -12,7 +12,7 @@
 	<header>
 		<div class="topnav">
 			<a class="active" href="{% url 'index' %}">Home</a>
-			<a href="{% url 'product' %}">Productos</a>
+			<a href="{% url 'shop' %}">shop</a>
 			{% if request.user.is_authenticated %}
 				<form action="{% url 'logout' %}" method="post" class="d-inline">
             			{% csrf_token %}

@@ -23,11 +23,11 @@
 	    <div class="max-w-4xl mx-auto px-8 py-24">
     <div class="grid grid-cols-3 gap-6">
         <div class="col-span-2 rounded-xl">
-            <img class="rounded-xl w-full h-auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Bs9OLcngrxktaYF_DFzAFigL7SgtIksacw&s">
+		<img class="rounded-xl w-full h-auto" src="{{product.image}}">
         </div>
         <div class="pt-32">
 		<h2>{{product.name}}</h2>
-		<p class="text-lg">${{product_price}}</p>
+		<p class="text-lg">${{product.price}}</p>
 
            <form method="post">
             {% csrf_token %}

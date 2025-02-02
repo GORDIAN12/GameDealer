@@ -36,7 +36,7 @@ def login_view(request):
         user=authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('product')
+            return redirect('shop')
         else:
             messages.error(request, 'usuario o contraseña incorrecto')
 
@@ -57,19 +57,40 @@ def stripe_config(request):
         return JsonResponse(stripe_config, safe=False)
 
 def index(request):
-    products=Product.objects.all()
-    return render(request, 'index.html', {'products': products})
+    products_list=stripe.Product.list()
+    products=[]
+    special_product='prod_RhJJK1OMe6aNYj'
+    for product in products_list['data']:
+        if product.get('metadata', {}).get('category')=="shop":
+            products.append(get_product_detail(product)) 
+    products=products[:8]
+    return render(request, 'index.html', {'products': products, 'special_product': special_product})
+
 def origin(request):
     return render(request, 'origin.html')
 
 def shop(request):
-    products_list=stripe.Product.list()
-    products=[]
-    for product in products_list['data']:
-        if product.get('metadata', {}).get('category')=="shop":
-            products.append(get_product_detail(product))
+    products = []
+    
+    has_more = True
+    starting_after = None
 
-    return render(request, 'shop.html', {'products':products })
+    while has_more:
+        if starting_after:
+            products_list = stripe.Product.list(limit=100, starting_after=starting_after)
+        else:
+            products_list = stripe.Product.list(limit=100)
+        
+        for product in products_list['data']:
+            if product.get('metadata', {}).get('category') == "shop":
+                products.append(get_product_detail(product))
+        
+        has_more = products_list['has_more']
+        if has_more:
+            starting_after = products_list['data'][-1]['id']  # El ID del último producto en la página
+
+    return render(request, 'shop.html', {'products': products})
+
 
 def product_view(request, product_id):
     product=product_id

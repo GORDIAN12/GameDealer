@@ -27,7 +27,7 @@
         </div>
         <div class="pt-32">
 		<h2>{{product.name}}</h2>
-		<p class="text-lg">${{product.price}}</p>
+		<p class="text-lg">${{product.price}} USD </p>
 
            <form method="post">
             {% csrf_token %}
@@ -40,7 +40,7 @@
   {% csrf_token %}
 </form>
        <p class="pt-8 text-sm">{{product.description}}</p>
-           <p class="text-sm hover:underline"><a href="https://andreas-juds-store.creator-spring.com/" target="_blank">Merch Store</a></p>
+       <p class="text-sm hover:underline"><a href="{%url 'shop' %}" >Store</a></p>
         </div>
     </div>
 </div>

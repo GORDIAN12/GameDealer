@@ -18,17 +18,17 @@
 
 
 </div>
+
 <div class="container-games">
 <h2 class="title-play">Nuestra seleccion para ti</h2>
 <div class="games">
 	<ul class="grid">
-    {% for producto in products %}
+    {% for product in products %}
         <li>
-            {% if producto.imagen %}
-                    <img class="img_game" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="150">
-   
-		    {% endif %}
-        </li>
+		<a href="{% url 'product' product.id %}" class="block aspect-square bg-gray-100 rounded-xl">
+			<img class="img_game" src="{{ product.image }}" alt="{{ producto.name }}" width="150">
+		</a>
+	</li>
     {% endfor %}
 </ul>
 </div>
@@ -53,7 +53,11 @@
 		</div>
 		<h4 class="price-game text-white">US$69.99</h4>
 		<div class="text-center">
-			<a href="#" class="btn btn-spider"><h5>Agregar al carrito</h5></a>
+			{% for product in products %}
+ 				{% if product.id == special_product %}
+					<a href="{% url 'product' product.id %}" class="btn btn-spider"><h5>Comprar</h5></a>
+				{% endif %} 
+			{% endfor %}
 		</div>
 	</div>
 </div>

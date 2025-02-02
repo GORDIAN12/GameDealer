@@ -1,26 +1,24 @@
 {% extends 'origin.html' %}
+{% load static %}
 
+{% block styles_extra %}
+<link rel="stylesheet" href="{% static 'shop.css' %}">
+{% endblock %}
 {% block content %} 
-
-<div class="max-w-6xl mx-auto p-12">
-    <h1>Shop</h1>
-    <div class="mx-auto py-2">
-        <div class="flex items-center flex-wrap">
-		{%for product in products%}
-            <product-item class="block w-full md:w-1/3 xl:w-1/4 md:p-2">
-		    <a href="{% url 'product' product.id %}" class="block aspect-square bg-gray-100 rounded-xl">
-			<img class="rounded-xl hover:shadow-lg" src="{{product.image}}">
+<div class="container-games">
+<h2 class="title-play">Nuestra seleccion</h2>
+<div class="games">
+        <ul class="grid">
+    {% for product in products %}
+        <li>
+                <a href="{% url 'product' product.id %}" class="block aspect-square bg-gray-100 rounded-xl">
+                        <img class="img_game" src="{{ product.image }}" alt="{{ producto.name }}" width="150">
                 </a>
-                <div class="pt-3">
-                    {{ produt.name }}               
-                </div>
-                <p class="pt-1 text-gray-400">
-		{{product.price}}
-                </p>
-            </product-item> 
-	    {% endfor %}
-        </div>
-    </div>
+		<p class="text-game">{{product.name}}</p>
+        </li>
+    {% endfor %}
+</ul>
+</div>
 </div>
 
 {% endblock %}

@@ -64,20 +64,20 @@ body {
 }
 
 .astro {
-    position: absolute;  /* Esto la coloca sobre la imagen de fondo */
+    position: absolute; 
     top: 75%; 
-    left: 50%;  /* Centra la imagen superpuesta horizontalmente */
-    transform: translate(-50%, -50%);  /* Ajuste preciso del centrado */
-    width: 25%;  /* Ajusta el tamaño de la imagen superpuesta según lo necesites */
+    left: 50%;  
+    transform: translate(-50%, -50%);
+    width: 25%; 
     height: auto;
 }
 
 .astro-hoja {
-    position: absolute;  /* Esto la coloca sobre la imagen de fondo */
+    position: absolute;
     top: 77%; 
-    left: 80%;  /* Centra la imagen superpuesta horizontalmente */
-    transform: translate(-50%, -50%);  /* Ajuste preciso del centrado */
-    width: 20%;  /* Ajusta el tamaño de la imagen superpuesta según lo necesites */
+    left: 80%;  
+    transform: translate(-50%, -50%); 
+    width: 20%;  
     height: auto;
 }
 
@@ -92,8 +92,8 @@ body {
 .container-info {
 	position: relative;
 	width: 100%;
-    	height: 80vh; /* Ocupa toda la ventana */
-   	overflow: hidden; /* Oculta cualquier contenido desbordado */
+    	height: 80vh; 
+   	overflow: hidden; 
 }
 
 .gra{

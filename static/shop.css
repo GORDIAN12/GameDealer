@@ -1,9 +1,16 @@
+@font-face{
+    font-family: 'custom-font';
+    src: url("Forum-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .grid {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     width: 100%;
     max-width: 1200px;
@@ -32,4 +39,11 @@
     align-items: center;
     text-align: center;
     padding: 50px;
+}
+
+.text-game{
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;    
+    text-align: center;
 }
